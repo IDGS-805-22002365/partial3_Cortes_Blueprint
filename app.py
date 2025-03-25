@@ -5,7 +5,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from config import DevelopmentConfig
 from datetime import datetime
-from models import Alumno, Pregunta, Respuesta, db, Usuario
+from models.alumno import Alumno
+from models.usuario import Usuario
+from models.pregunta import Pregunta
+from models.respuesta import Respuesta
+from models.maestro import Maestro
+from models.init import db
 from forms import AlumnoForm, PreguntaForm, ExamenForm, RegisterForm, LoginForm
 
 # Importar los blueprints

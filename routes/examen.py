@@ -1,7 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required
 from datetime import datetime
-from models import Alumno, Pregunta, Respuesta, db
+from models.alumno import Alumno
+from models.pregunta import Pregunta
+from models.respuesta import Respuesta
+from models.init import db
 from forms import ExamenForm
 import logging
 

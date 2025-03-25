@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models import db, Maestro
+from models.maestro import Maestro
+from models.init import db
 from forms import MaestroForm
 
 maestros_bp = Blueprint("maestros", __name__, url_prefix="/maestros")
