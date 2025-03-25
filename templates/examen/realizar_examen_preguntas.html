@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Realizar Examen</h2>
+
+    {{ macros.render_alumno_info(alumno, edad=edad) }}
+
+    <form id="examenForm" method="POST" action="{{ url_for('examen.realizar_examen_preguntas', alumno_id=alumno.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        {% for pregunta in preguntas %}
+        <div class="mb-6 p-4 border rounded-lg bg-gray-50">
+            <p class="text-lg font-semibold mb-2">{{ pregunta.pregunta }}</p>
+
+            <div class="space-y-2">
+                <label class="flex items-center">
+                    <input type="radio" name="pregunta_{{ pregunta.id }}" value="a" class="mr-2">
+                    <span>{{ pregunta.opcion_a }}</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" name="pregunta_{{ pregunta.id }}" value="b" class="mr-2">
+                    <span>{{ pregunta.opcion_b }}</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" name="pregunta_{{ pregunta.id }}" value="c" class="mr-2">
+                    <span>{{ pregunta.opcion_c }}</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" name="pregunta_{{ pregunta.id }}" value="d" class="mr-2">
+                    <span>{{ pregunta.opcion_d }}</span>
+                </label>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="mt-6">
+            {{ macros.render_button('Enviar Examen') }}
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('examenForm').addEventListener('submit', function(event) {
+        var preguntas = document.querySelectorAll('input[type="radio"]');
+        var preguntasRespondidas = {};
+
+        preguntas.forEach(function(radio) {
+            var preguntaId = radio.name;
+            if (radio.checked) {
+                preguntasRespondidas[preguntaId] = true;
+            }
+        });
+
+        for (var i = 0; i < preguntas.length; i++) {
+            var preguntaId = preguntas[i].name;
+            if (!preguntasRespondidas[preguntaId]) {
+                event.preventDefault(); // Evita que el formulario se envíe
+                alert('Por favor, responda todas las preguntas antes de enviar el formulario.');
+                return;
+            }
+        }
+    });
+</script>
+{% endblock %}

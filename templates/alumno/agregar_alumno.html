@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Agregar Alumno</h2>
+    <form method="POST" action="{{ url_for('alumnos.agregar_alumno') }}">
+        {{ form.hidden_tag() }}
+        
+        {{ macros.render_field(form.nombre) }}
+        {{ macros.render_field(form.apellido_paterno) }}
+        {{ macros.render_field(form.apellido_materno) }}
+        {{ macros.render_field(form.fecha_nacimiento) }}
+        {{ macros.render_field(form.grupo) }}
+        
+        <div class="mb-4">
+            {{ macros.render_button('Guardar') }}
+        </div>
+    </form>
+</div>
+{% endblock %}

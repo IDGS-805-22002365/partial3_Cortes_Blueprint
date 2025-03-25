@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Realizar Examen</h2>
+    <form method="POST" action="{{ url_for('examen.realizar_examen') }}">
+        {{ form.hidden_tag() }}
+        
+        {{ macros.render_field(form.nombre) }}
+        {{ macros.render_field(form.apellido_paterno) }}
+        
+        <div class="mb-4">
+            {{ form.submit(class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

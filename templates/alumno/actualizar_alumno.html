@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Actualizar Alumno</h2>
+        
+        <form method="POST" class="space-y-4">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                <label for="nombre" class="block text-gray-700 font-medium mb-2">
+                    {{ form.nombre.label }}
+                </label>
+                {{ form.nombre(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                {% for error in form.nombre.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="form-group">
+                <label for="apellido_paterno" class="block text-gray-700 font-medium mb-2">
+                    {{ form.apellido_paterno.label }}
+                </label>
+                {{ form.apellido_paterno(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                {% for error in form.apellido_paterno.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="form-group">
+                <label for="apellido_materno" class="block text-gray-700 font-medium mb-2">
+                    {{ form.apellido_materno.label }}
+                </label>
+                {{ form.apellido_materno(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                {% for error in form.apellido_materno.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="form-group">
+                <label for="fecha_nacimiento" class="block text-gray-700 font-medium mb-2">
+                    {{ form.fecha_nacimiento.label }}
+                </label>
+                {{ form.fecha_nacimiento(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                {% for error in form.fecha_nacimiento.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="form-group">
+                <label for="grupo" class="block text-gray-700 font-medium mb-2">
+                    {{ form.grupo.label }}
+                </label>
+                {{ form.grupo(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                {% for error in form.grupo.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="flex justify-between pt-4">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Actualizar
+                </button>
+                <a href="{{ url_for('alumnos.listar_alumnos') }}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 text-center">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

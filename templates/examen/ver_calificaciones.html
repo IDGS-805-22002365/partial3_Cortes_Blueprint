@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Ver Calificaciones</h2>
+    <form method="POST" action="{{ url_for('examen.ver_calificaciones') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        
+        {{ macros.render_select('grupo', [('1', 'Grupo 1'), ('2', 'Grupo 2'),('3', 'Grupo 3'),('4', 'Grupo 4')], 'Seleccionar Grupo') }}
+        
+        <div class="mb-4">
+            {{ macros.render_button('Ver Calificaciones') }}
+        </div>
+    </form>
+
+    {% if calificaciones %}
+    <div class="mt-6">
+        <h3 class="text-xl font-bold mb-4">Calificaciones del Grupo {{ grupo }}</h3>
+        <ul>
+            {% for alumno, calificacion in calificaciones %}
+            <li class="mb-2">
+                <span class="font-semibold">{{ alumno.nombre }} {{ alumno.apellido_paterno }} {{ alumno.apellido_materno }}:</span>
+                <span>{{ calificacion }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div class="mt-6">
+        <a href="{{ url_for('main.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+            Volver al inicio
+        </a>
+    </div>
+</div>
+{% endblock %}

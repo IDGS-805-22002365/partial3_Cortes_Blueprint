@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Lista de Maestros</h2>
+                <a href="{{ url_for('maestros.agregar_maestro') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+                    Agregar Maestro
+                </a>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} mb-4 p-4 rounded-lg {{ 'bg-green-500' if category == 'success' else 'bg-red-500' }} text-white">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <table class="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="bg-blue-600 text-white">
+                        <th class="px-6 py-3 text-left">ID</th>
+                        <th class="px-6 py-3 text-left">Nombre</th>
+                        <th class="px-6 py-3 text-left">Apellido</th>
+                        <th class="px-6 py-3 text-left">Materia</th>
+                        <th class="px-6 py-3 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for maestro in maestros %}
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-4">{{ maestro.id }}</td>
+                        <td class="px-6 py-4">{{ maestro.nombre }}</td>
+                        <td class="px-6 py-4">{{ maestro.apellido }}</td>
+                        <td class="px-6 py-4">{{ maestro.materia }}</td>
+                        <td class="px-6 py-4 space-x-2 text-center">
+                            <a href="{{ url_for('maestros.editar_maestro', id=maestro.id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Editar</a>
+                            <form action="{{ url_for('maestros.eliminar_maestro', id=maestro.id) }}" method="POST" class="inline">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300" onclick="return confirm('¿Seguro que deseas eliminar este maestro?');">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

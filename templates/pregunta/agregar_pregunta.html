@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Agregar Pregunta</h2>
+    <form method="POST" action="{{ url_for('preguntas.agregar_pregunta') }}">
+        {{ form.hidden_tag() }}
+        
+        <!-- Usar el macro para los campos del formulario -->
+        {{ macros.render_field(form.pregunta) }}
+        {{ macros.render_field(form.opcion_a) }}
+        {{ macros.render_field(form.opcion_b) }}
+        {{ macros.render_field(form.opcion_c) }}
+        {{ macros.render_field(form.opcion_d) }}
+        {{ macros.render_field(form.respuesta_correcta) }}
+        
+        <!-- Usar el macro para el botón -->
+        <div class="mb-4">
+            {{ macros.render_button('Agregar Pregunta') }}
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Actualizar Pregunta</h2>
+        
+        <form method="POST" class="space-y-4">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                <label for="pregunta" class="block text-gray-700 font-medium mb-2">
+                    {{ form.pregunta.label }}
+                </label>
+                {{ form.pregunta(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                {% for error in form.pregunta.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="form-group">
+                    <label for="opcion_a" class="block text-gray-700 font-medium mb-2">
+                        {{ form.opcion_a.label }}
+                    </label>
+                    {{ form.opcion_a(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                    {% for error in form.opcion_a.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="opcion_b" class="block text-gray-700 font-medium mb-2">
+                        {{ form.opcion_b.label }}
+                    </label>
+                    {{ form.opcion_b(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                    {% for error in form.opcion_b.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="opcion_c" class="block text-gray-700 font-medium mb-2">
+                        {{ form.opcion_c.label }}
+                    </label>
+                    {{ form.opcion_c(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                    {% for error in form.opcion_c.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="opcion_d" class="block text-gray-700 font-medium mb-2">
+                        {{ form.opcion_d.label }}
+                    </label>
+                    {{ form.opcion_d(class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                    {% for error in form.opcion_d.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="respuesta_correcta" class="block text-gray-700 font-medium mb-2">
+                    {{ form.respuesta_correcta.label }}
+                </label>
+                <div class="flex items-center space-x-4">
+                    {{ form.respuesta_correcta(class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                    <span class="text-sm text-gray-500">(Seleccione a, b, c o d)</span>
+                </div>
+                {% for error in form.respuesta_correcta.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="flex justify-between pt-4">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Actualizar Pregunta
+                </button>
+                <a href="{{ url_for('preguntas.listar_preguntas') }}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 text-center">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
